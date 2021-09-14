@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.decomposition import PCA
 
 CXX_EN_MATH = [
   [35.2, -31.95],
@@ -24,12 +23,23 @@ PCC_EN_MATH = np.corrcoef(EN, MATH)
 PCC_EN_SC = np.corrcoef(EN, SCIENCE)
 PCC_MATH_SC = np.corrcoef(MATH, SCIENCE)
 
-print(PCC_EN_MATH)
-print(PCC_EN_SC)
-print(PCC_MATH_SC)
+print("Pearson's correlation coefficient with English and Math: \n{}\n".format(PCC_EN_MATH))
+print("Pearson's correlation coefficient with English and Science: \n{}\n".format(PCC_EN_SC))
+print("Pearson's correlation coefficient with Math and Science: \n{}\n".format(PCC_MATH_SC))
 
 
 # 3.4
-pca = PCA(whiten=True)
-whitened = pca.fit_transform([[2, 2], [2, 4]])
-print(whitened)
+cov = np.array([[2, 2], [2, 4]])
+def whiten(X):
+  U, S, U_T= np.linalg.svd(X)
+  UNIT_MATRIX = np.dot(U, U.T) # I
+  print("EigenVector of Covariance: \n{}\n".format(U)) # EigenVectors
+  print("EigenValues of Covariance1: \n{}\n".format(S)) # EigenValues
+  print(1/np.sqrt(S))
+  print("EigenValues of Covariance2: \n{}\n".format(np.dot(np.dot(U.T, X), U))) # EigenValues
+  
+  V = np.dot(1/np.sqrt(S), U.T)
+  
+  return V
+  
+print("V for whitening z vector: \n{}\n".format(whiten(cov)))
