@@ -12,8 +12,8 @@ rxy = x@y.T/20
 INV_Rxx = np.linalg.inv(Rxx)
 opt_param = INV_Rxx@rxy
 
-print("상관 행렬:\n", Rxx)
-print("상호 상관 행렬:\n",rxy)
+print("\n상관 행렬:\n", Rxx)
+print("\n상호 상관 행렬:\n",rxy)
 
-print("상관 행렬의 역행렬:\n",INV_Rxx)
-print("최적 파라미터 세타:\n", opt_param)
+print("\n상관 행렬의 역행렬:\n",INV_Rxx)
+print("\n최적 파라미터 세타:\n", opt_param)
